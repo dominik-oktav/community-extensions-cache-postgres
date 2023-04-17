@@ -18,7 +18,7 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
         private readonly ILogger<DatabaseOperations> _logger;
         private readonly bool _disableUpdateOnGetCacheItem;
 
-		public DatabaseOperations(IOptions<PostgreSqlCacheOptions> options, ILogger<DatabaseOperations> logger)
+        public DatabaseOperations(IOptions<PostgreSqlCacheOptions> options, ILogger<DatabaseOperations> logger)
         {
             var cacheOptions = options.Value;
 
@@ -224,7 +224,7 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
                 await connection.ExecuteAsync(updateCacheItem);
             }
 
-			if (includeValue)
+            if (includeValue)
             {
                 var getCacheItem = new CommandDefinition(
                     SqlCommands.GetCacheItemSql,

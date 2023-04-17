@@ -50,12 +50,12 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
         /// </summary>
         public bool DisableRemoveExpired { get; set; } = false;
 
-		/// <summary>
-		/// If set to true no update of ExpiresAtTime will be performed when getting a cache item.
+        /// <summary>
+        /// If set to true no update of ExpiresAtTime will be performed when getting a cache item.
         /// Default value is false.
-		/// </summary>
-		public bool DisableUpdateOnGetCacheItem { get; set; } = false;
+        /// </summary>
+        public bool DisableUpdateOnGetCacheItem { get; set; } = false;
 
-        PostgreSqlCacheOptions IOptions<PostgreSqlCacheOptions>.Value => this;
+		PostgreSqlCacheOptions IOptions<PostgreSqlCacheOptions>.Value => this;
     }
 }
