@@ -56,6 +56,6 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
         /// </summary>
         public bool DisableUpdateOnGetCacheItem { get; set; } = false;
 
-		PostgreSqlCacheOptions IOptions<PostgreSqlCacheOptions>.Value => this;
+        PostgreSqlCacheOptions IOptions<PostgreSqlCacheOptions>.Value => this;
     }
 }
