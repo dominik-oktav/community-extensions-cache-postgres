@@ -16,7 +16,7 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
     internal sealed class DatabaseOperations : IDatabaseOperations
     {
         private readonly ILogger<DatabaseOperations> _logger;
-        private readonly bool _disableUpdateOnGetCacheItem;
+        private readonly bool _updateOnGetCacheItem;
 
         public DatabaseOperations(IOptions<PostgreSqlCacheOptions> options, ILogger<DatabaseOperations> logger)
         {
@@ -44,7 +44,7 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
             SqlCommands = new SqlCommands(cacheOptions.SchemaName, cacheOptions.TableName);
 
             this._logger = logger;
-            this._disableUpdateOnGetCacheItem = cacheOptions.DisableUpdateOnGetCacheItem;
+            this._updateOnGetCacheItem = !cacheOptions.DisableUpdateOnGetCacheItem;
             if (cacheOptions.CreateInfrastructure)
             {
                 CreateSchemaAndTableIfNotExist();
@@ -189,7 +189,7 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
 
             using var connection = new NpgsqlConnection(ConnectionString);
 
-            if (!_disableUpdateOnGetCacheItem)
+            if (_updateOnGetCacheItem)
             {
                 var updateCacheItem = new CommandDefinition(
                     SqlCommands.UpdateCacheItemSql,
@@ -215,7 +215,7 @@ namespace Community.Microsoft.Extensions.Caching.PostgreSql
 
             await using var connection = new NpgsqlConnection(ConnectionString);
 
-            if (!_disableUpdateOnGetCacheItem)
+            if (_updateOnGetCacheItem)
             {
                 var updateCacheItem = new CommandDefinition(
                     SqlCommands.UpdateCacheItemSql,
